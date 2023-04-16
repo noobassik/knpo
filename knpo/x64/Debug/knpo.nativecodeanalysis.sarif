@@ -1,0 +1,65 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Арифметическое переполнение: использование оператора \"-\" на байтовом значении 4 и приведение результата к байтовому значению 8. Приведите значение к более широкому типу перед вызовом оператора \"-\", чтобы избежать переполнения (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/david/source/repos/knpo/knpo/knpo.cpp"
+                },
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 33,
+                  "endLine": 64,
+                  "endColumn": 39
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "main",
+                  "decoratedName": "main",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.34.31937.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/david/source/repos/knpo/knpo/knpo.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "39c7e0280c7e9ceaffc8609f42da14bc76c5022bbbd28a47062fc8c8653b99ba"
+          }
+        }
+      ]
+    }
+  ]
+}

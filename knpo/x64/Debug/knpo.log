@@ -1,0 +1,3 @@
+﻿  knpo.cpp
+C:\Users\david\source\repos\knpo\knpo\knpo.cpp(108,60): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  knpo.vcxproj -> C:\Users\david\source\repos\knpo\x64\Debug\knpo.exe

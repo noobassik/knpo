@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\david\source\repos\knpo\knpo\</FILEPATH>
+      <FILENAME>knpo.cpp</FILENAME>
+      <LINE>64</LINE>
+      <COLUMN>36</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Арифметическое переполнение: использование оператора "-" на байтовом значении 4 и приведение результата к байтовому значению 8. Приведите значение к более широкому типу перед вызовом оператора "-", чтобы избежать переполнения (io.2).</DESCRIPTION>
+    <FUNCTION>main</FUNCTION>
+    <DECORATED>main</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>
