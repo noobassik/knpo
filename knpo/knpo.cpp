@@ -5,10 +5,10 @@
 #include <sstream>
 #include <queue>
 #include "knpo.h"
-
+    
 using namespace std;
 
-void dijkstra(vector<vector<int>>& adj_matrix, int V, int src, int targetCityNumber) {
+int findShortestPath(vector<vector<int>>& adj_matrix, int V, int src) {
 
     vector<int> dist(V, INT_MAX); // Инициализировать все расстояния как бесконечные
     dist[src] = 0; // Расстояние исходной вершины от самой себя всегда равно 0 
@@ -25,41 +25,31 @@ void dijkstra(vector<vector<int>>& adj_matrix, int V, int src, int targetCityNum
             }
         }
     }
-    //cout << "Vertex\tDistance from source\n";
-    //for (int i = 0; i < V; i++)
-    //    cout << i + 1 << "\t" << dist[i] << endl;
-
-    cout << dist[targetCityNumber];
+    return dist.back();
 }
 
-int main()
-{
+vector<string> readDataFromFile(vector<vector<int>> &adj_matrix)
+{ 
+    //открытие файла
     ifstream file;
-    file.open("text.csv");
-    
-    string targetCity;
-    int targetCityNumber = 0;
-    getline(file, targetCity);
-
+    file.open("input.csv");
+    //считывание первой строки файла
     string line;
     getline(file, line);
-
     stringstream ss(line);
+
     string label;
     vector<string> labels;
+    int targetCityNumber = 0;
+
+    //заполнить вектор названиями городов
     while (getline(ss, label, ';')) {
         if (label != "") {
             labels.push_back(label);
         }
-        //красивее написать, всегда дает (кол-во городов - 1), добавить условие остановки
-        targetCityNumber += (label != targetCity and label != "");
     }
-    auto num_nodes = labels.size();
-
-    // инициализировать матрицу нулями
-    vector<vector<int>> adj_matrix(num_nodes, vector<int>(num_nodes, 0));
- 
-    // считывание
+    adj_matrix.resize(labels.size(), vector<int>(labels.size(), 0));
+    //заполнение матрицы смежности из файла
     int row = 0;
     while (getline(file, line)) {
         stringstream ss(line);
@@ -74,38 +64,27 @@ int main()
         row++;
     }
 
-
-
-    vector<int> cost(labels.size()); // стоимость бензина в каждом городе
-    for (int i = 0; i < labels.size(); i++)
-    {
-        for (int j = 0; j < labels.size(); j++)
-        {
-            if (adj_matrix[j][i])
-            {
-                cost[i] = adj_matrix[j][i];
-            }
-        }
-    }
-
-
-    // вывод
-    cout << ";";
-    for (string label : labels) {
-        cout << label << ";";
-    }
-    cout << endl;
-    for (int i = 0; i < num_nodes; i++) {
-        cout << labels[i] << ";";
-        for (int j = 0; j < num_nodes; j++) {
-            cout << adj_matrix[i][j] << ";";
-        }
-        cout << endl;
-    }
-
     file.close();
 
-    dijkstra(adj_matrix, labels.size(), 0, targetCityNumber);
+    return labels;
+}
+
+void outputResultToFile(vector<vector<int>> adj_matrix, vector<string> labels)
+{
+    //вывод в файл
+    ofstream fout;
+    fout.open("output.txt");
+    fout << findShortestPath(adj_matrix, labels.size(), 0);
+    fout.close();
+}
+
+int main()
+{   
+    vector<vector<int>> adj_matrix;
+    auto labels = readDataFromFile(adj_matrix);
+    int num_nodes = labels.size();
+
+    outputResultToFile(adj_matrix, labels);
 
     return 0;
 }
